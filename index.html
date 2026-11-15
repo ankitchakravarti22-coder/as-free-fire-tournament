@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AS FREE FIRE TOURNAMENT</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+ background:#080711;color:white; font-family:Arial,sans-serif;
+}
+header{ background:#120d20;padding:20px 12px; 
+ text-align:center;border-bottom:2px solid #a855f7;
+}
+.logo{ font-size:25px;font-weight:bold; 
+ color:#d8a4ff;text-shadow:0 0 15px #a855f7;
+}
+nav{margin-top:15px} nav a{ color:white;text-decoration:none; 
+ margin:7px;font-size:13px;
+}
+.hero{ text-align:center;padding:65px 15px; 
+ background:radial-gradient(circle,#451078,#080711 75%);
+}
+.hero h1{ font-size:clamp(30px,8vw,48px); 
+ color:#d8a4ff;text-shadow:0 0 20px #a855f7;
+}
+.hero p{color:#ddd;margin:15px 0} .btn{ 
+ display:inline-block;padding:13px 22px; 
+ background:#a855f7;color:white; border:0;border-radius:8px; 
+ text-decoration:none;font-weight:bold; cursor:pointer;
+}
+section{padding:40px 16px} .title{ 
+ color:#d8a4ff;text-align:center; 
+ margin-bottom:25px;font-size:25px;
+}
+.cards{ display:grid; 
+ grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); 
+ gap:15px;
+}
+.card{ background:#171329;padding:23px 12px; 
+ text-align:center;border:1px solid #913ce0; border-radius:12px;
+}
+.card h3{color:#d8a4ff;margin-bottom:10px} .card 
+p{color:#ccc;font-size:14px} form,.admin-box{
+ max-width:450px;margin:auto; background:#171329;padding:22px; 
+ border:1px solid #913ce0;border-radius:12px;
+}
+label{display:block;color:#d8a4ff;margin-top:12px} input,select{ 
+ width:100%;padding:13px;margin-top:8px; 
+ background:#090817;color:white; border:1px solid 
+ #7430b8;border-radius:7px;
+}
+form button{width:100%;margin-top:20px}
+#message{text-align:center;margin-top:15px;color:#70ffb0}
+.player{ background:#171329;padding:15px; margin:10px 
+ auto;border-left:3px solid #a855f7; 
+ border-radius:8px;max-width:600px;
+}
+.small{font-size:12px;color:#aaa;margin-top:7px} 
+.admin-box{margin-top:20px} .admin-box button{margin-top:10px} 
+.hidden{display:none} footer{
+ text-align:center;padding:25px; 
+ background:#120d20;color:#d8a4ff;
+}
+.notice{ text-align:center;color:#aaa; 
+ font-size:12px;line-height:1.6; margin-top:15px;
+}
+</style> </head> <body> <header> <div class="logo">⚡ AS FREE 
+ FIRE ⚡</div> <p style="color:#c99aff;margin-top:6px"> 
+ TOURNAMENT </p> <nav>
+  <a href="#home">HOME</a> <a href="#modes">MODES</a> <a 
+  href="#register">REGISTER</a> <a href="#schedule">SCHEDULE</a> 
+  <a href="#admin">ADMIN</a>
+ </nav> </header> <div class="hero" id="home"> <h1>AS FREE 
+ FIRE</h1> <h2 style="color:#fff;margin-top:12px"> TOURNAMENT 
+ </h2> <p>PLAY • COMPETE • WIN</p> <p>Join our free gaming 
+ tournaments!</p> <a href="#register" class="btn">REGISTER 
+ NOW</a>
+</div> <section id="modes"> <h2 class="title">🏆 TOURNAMENT 
+ MODES</h2> <div class="cards">
+  <div class="card"> <h3>SOLO</h3><p>1 Player</p> </div> <div 
+  class="card">
+   <h3>DUO</h3><p>2 Players</p> </div> <div class="card"> 
+   <h3>SQUAD</h3><p>4 Players</p>
+  </div> </div> </section> <section id="register"> <h2 
+ class="title">📝 PLAYER REGISTRATION</h2> <form id="regForm">
+  <label>Player Name</label> <input id="playerName" 
+  maxlength="30"
+   placeholder="Enter player name" required> <label>Free Fire 
+  UID</label> <input id="playerUid" maxlength="25"
+   placeholder="Enter game UID" required> <label>Select 
+  Tournament</label> <select id="mode">
+   <option>Solo</option> <option>Duo</option> 
+   <option>Squad</option>
+  </select> <label>Team Name (Optional)</label> <input id="team" 
+  maxlength="30"
+   placeholder="Enter team name"> <button class="btn" 
+  type="submit">
+   FREE REGISTRATION </button> <p id="message"></p> </form> <p 
+ class="notice">
+  Free entry. Never share your game password or OTP. </p> 
+</section> <section id="schedule">
+ <h2 class="title">📅 TOURNAMENT DETAILS</h2> <div 
+ class="cards">
+  <div class="card"> <h3>ENTRY FEE</h3> <p>FREE</p> </div> <div 
+  class="card">
+   <h3>DATE</h3> <p id="date">Coming Soon</p> </div>
+  <div class="card">
+   <h3>TIME</h3>
+   <p id="time">Coming Soon</p>
+  </div>
+  <div class="card">
+   <h3>WINNERS</h3>
+   <p id="winner">Coming Soon</p>
+  </div>
+ </div>
+</section>
+
+<section>
+ <h2 class="title">👑 REGISTERED PLAYERS</h2>
+ <div id="playerList"></div>
+</section>
+
+<section id="admin">
+ <h2 class="title">🔐 ADMIN PANEL</h2>
+
+ <div class="admin-box">
+  <p style="color:#d8a4ff">Admin Login</p>
+  <input id="adminPass" type="password"
+   placeholder="Enter admin PIN">
+  <button class="btn" onclick="login()">LOGIN</button>
+  <p id="adminMsg" class="small"></p>
+
+  <div id="adminPanel" class="hidden">
+   <h3 style="margin-top:20px;color:#d8a4ff">
+    Update Tournament
+   </h3>
+
+   <label>Match Date</label>
+   <input id="newDate" type="text" placeholder="Example: 20 Dec 2026">
+
+   <label>Match Time</label>
+   <input id="newTime" type="text" placeholder="Example: 5:00 PM">
+
+   <label>Winner Name</label>
+   <input id="newWinner" type="text" placeholder="Winner name">
+
+   <button class="btn" onclick="updateDetails()">
+    SAVE DETAILS
+   </button>
+
+   <h3 style="margin-top:25px;color:#d8a4ff">
+    Player Registrations
+   </h3>
+   <div id="adminPlayers"></div>
+
+   <button class="btn" onclick="logout()">
+    LOGOUT
+   </button>
+  </div>
+ </div>
+
+ <p class="notice">
+  Demo admin panel only. Do not use real player data on a public
+  website until secure server-side authentication is added.
+ </p>
+</section>
+
+<footer>
+ <h3>AS FREE FIRE TOURNAMENT</h3>
+ <p style="margin-top:10px">© 2026 All Rights Reserved</p>
+ <p class="small">Independent community tournament.
+ Not affiliated with Garena.</p>
+</footer>
+
+<script>
+const ADMIN_PIN = "2580";
+
+let players = JSON.parse(
+ localStorage.getItem("asPlayers") || "[]"
+);
+
+let details = JSON.parse(
+ localStorage.getItem("asDetails") ||
+ '{"date":"Coming Soon","time":"Coming Soon","winner":"Coming Soon"}'
+);
+
+function savePlayers(){
+ localStorage.setItem("asPlayers",JSON.stringify(players));
+}
+
+function showPlayers(){
+ let list=document.getElementById("playerList");
+ list.innerHTML="";
+
+ if(players.length===0){
+  list.textContent="No registrations yet.";
+  return;
+ }
+
+ players.forEach((p,i)=>{
+  let div=document.createElement("div");
+  div.className="player";
+
+  let name=document.createElement("h3");
+  name.textContent=(i+1)+". "+p.name;
+
+  let mode=document.createElement("p");
+  mode.textContent="Mode: "+p.mode;
+
+  div.append(name,mode);
+  list.appendChild(div);
+ });
+}
+
+function showAdminPlayers(){
+ let box=document.getElementById("adminPlayers");
+ box.innerHTML="";
+
+ players.forEach((p,i)=>{
+  let div=document.createElement("div");
+  div.className="player";
+
+  let info=document.createElement("p");
+  info.textContent=p.name+" | UID: "+p.uid+" | "+p.mode;
+
+  let remove=document.createElement("button");
+  remove.className="btn";
+  remove.textContent="REMOVE";
+  remove.onclick=()=>{
+   if(confirm("Remove this registration?")){
+    players.splice(i,1);
+    savePlayers();
+    showPlayers();
+    showAdminPlayers();
+   }
+  };
+
+  div.append(info,remove);
+  box.appendChild(div);
+ });
+}
+
+document.getElementById("regForm")
+.addEventListener("submit",function(e){
+ e.preventDefault();
+
+ let name=document.getElementById("playerName").value.trim();
+ let uid=document.getElementById("playerUid").value.trim();
+ let mode=document.getElementById("mode").value;
+ let team=document.getElementById("team").value.trim();
+
+ if(!name || !uid)return;
+
+ if(players.some(p=>p.uid===uid)){
+  document.getElementById("message").textContent=
+   "This UID is already registered!";
+  return;
+ }
+
+ players.push({name,uid,mode,team});
+ savePlayers();
+ showPlayers();
+
+ document.getElementById("message").textContent=
+  "Registration successful! 🎉";
+
+ this.reset();
+});
+
+function loadDetails(){
+ document.getElementById("date").textContent=details.date;
+ document.getElementById("time").textContent=details.time;
+ document.getElementById("winner").textContent=details.winner;
+}
+
+function login(){
+ let pass=document.getElementById("adminPass").value;
+
+ if(pass===ADMIN_PIN){
+  document.getElementById("adminPanel").classList.remove("hidden");
+  document.getElementById("adminMsg").textContent="Login successful!";
+  showAdminPlayers();
+ }else{
+  document.getElementById("adminMsg").textContent="Incorrect PIN!";
+ }
+}
+
+function logout(){
+ document.getElementById("adminPanel").classList.add("hidden");
+ document.getElementById("adminPass").value="";
+}
+
+function updateDetails(){
+ details.date=document.getElementById("newDate").value.trim() || details.date;
+ details.time=document.getElementById("newTime").value.trim() || details.time;
+ details.winner=document.getElementById("newWinner").value.trim() || details.winner;
+
+ localStorage.setItem("asDetails",JSON.stringify(details));
+ loadDetails();
+ alert("Details saved!");
+}
+
+showPlayers();
+loadDetails();
+</script>
+</body>
+</html>
+
